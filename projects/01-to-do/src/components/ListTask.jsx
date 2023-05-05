@@ -1,6 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
+import { statusData } from '../helpers/statusData'
 
 export const ListTask = () => {
+  const [tasks, setTasks] = useState([])
+
+  const deleteTask = (index) => {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        tasks.splice(index, 1)
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        setTasks(tasks)
+
+        Swal.fire(
+          'Deleted!',
+          'The record has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
+
+  const getTasks = () => {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+    
+    setTasks(tasks)
+  }
+
+  useEffect(() => {
+    getTasks()
+  }, [])
+  
   return (
     <>
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
@@ -17,46 +57,30 @@ export const ListTask = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className='border-b'>
-                  <td scope="row" className='px-6 py-4'>React js</td>
-                  <td className='px-6 py-4'>2023-05-03 | 2023-05-03</td>
-                  <td className='px-6 py-4'>Success</td>
-                  <td className='px-6 py-4'>
-                    <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='border-b'>
-                  <td className='px-6 py-4 w-80'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae labore</td>
-                  <td className='px-6 py-4'>2023-05-03 | 2023-05-03</td>
-                  <td className='px-6 py-4'>Success</td>
-                  <td className='px-6 py-4'>
-                    <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='border-b'>
-                  <td className='px-6 py-4 w-80'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae labore</td>
-                  <td className='px-6 py-4'>2023-05-03 | 2023-05-03</td>
-                  <td className='px-6 py-4'>Success</td>
-                  <td className='px-6 py-4'>
-                    <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='border-b'>
-                  <td className='px-6 py-4 w-80'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae labore</td>
-                  <td className='px-6 py-4'>2023-05-03 | 2023-05-03</td>
-                  <td className='px-6 py-4'>Success</td>
-                  <td className='px-6 py-4'>
-                    <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='border-b'>
-                  <td className='px-6 py-4 w-80'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae labore</td>
-                  <td className='px-6 py-4'>2023-05-03 | 2023-05-03</td>
-                  <td className='px-6 py-4'>Success</td>
-                  <td className='px-6 py-4'>
-                    <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                  </td>
-                </tr>
+                {
+                  tasks.length ?
+                      tasks.map((task, i) => {
+                        const status = statusData.filter(e => e.code == task.status);
+
+                        return (
+                          <tr key={ i } className='border-b'>
+                            <td scope="row" className='px-6 py-4'>{ task.name }</td>
+                            <td className='px-6 py-4'>{ task.date_start } | { task.date_end }</td>
+                            <td className='px-6 py-4'>{ (status[status.length - 1]) ? status[status.length - 1]['name'] : '-' }</td>
+                            <td className='px-6 py-4'>
+                              <div className='flex gap-2'>
+                                <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
+                                <button onClick={ () => deleteTask(i) } className='bg-red-600 px-2 py-1 rounded-lg text-white'>Delete</button>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    :
+                      <tr className='border-b'>
+                        <td colSpan={ 4 } className='px-6 py-4'>There's not records</td>
+                      </tr>
+                }
               </tbody>
             </table>
           </div>
