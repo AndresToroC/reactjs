@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ListTask } from './ListTask'
 import { useForm } from '../hooks/useForm'
 import { statusData } from '../helpers/statusData';
+import { taskStore } from '../store/taskStore';
 
 export const FormTask = () => {
+  const { tasks, selectedTask, setTasks, setselectedTask } = taskStore();
+
   const { valueForm, handleInputChange, resetForm } = useForm({
     name: '',
     description: '',
@@ -11,6 +14,7 @@ export const FormTask = () => {
     date_end: '',
     status: ''
   });
+  
 
   const { name, description, date_start, date_end, status } = valueForm;
 
@@ -28,15 +32,23 @@ export const FormTask = () => {
     if (Date.parse(date_start) > Date.parse(date_end)) {
       return
     }
-    
-    // Get tasks
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.push(valueForm)
 
+    if (!status.length) {
+      return
+    }
+
+    const { id, ...data } = valueForm;
+    
     // Save tasks
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+    tasks.push(data)
+    setTasks(tasks)
     
     resetForm();
+  }
+
+  const clearForm = () => {
+    resetForm()
+    setselectedTask(null)
   }
   
   return (
@@ -66,23 +78,10 @@ export const FormTask = () => {
                   <input type='date' id='date_end' name='date_end' value={ date_end } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' placeholder='New task' />
                 </fieldset>
               </div>
-              {/* <div className='grid grid-cols-3 gap-4 mb-3'>
-                <fieldset>
-                  <input type='checkbox' id='status' className='w-4 h-4 bg-gray-100 border-gray-300 rounded' />
-                  <label htmlFor='status' className='ml-2 font-medium text-sm text-gray-600'>Pending</label>
-                </fieldset>
-                <fieldset>
-                  <input type='checkbox' id='status' className='w-4 h-4 bg-gray-100 border-gray-300 rounded' />
-                  <label htmlFor='status' className='ml-2 font-medium text-sm text-gray-600'>Proccess</label>
-                </fieldset>
-                <fieldset>
-                  <input type='checkbox' id='status' className='w-4 h-4 bg-gray-100 border-gray-300 rounded' />
-                  <label htmlFor='status' className='ml-2 font-medium text-sm text-gray-600'>Completed</label>
-                </fieldset>
-              </div> */}
               <fieldset className='mb-3'>
-                <label htmlFor="status" className='block font-medium mb-2'>Status</label>
-                <select name="status" id="status" value={ status } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-lg text-sm w-full'>
+                <label htmlFor='status' className='block font-medium mb-2'>Status</label>
+                <select name='status' id='status' value={ status } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-lg text-sm w-full'>
+                  <option disabled={ true } value=''>Select a choice</option>
                   {
                     statusData.map(status => {
                       return (
@@ -93,8 +92,11 @@ export const FormTask = () => {
                 </select>
               </fieldset>
               <fieldset className='flex gap-2'>
-                <button type='submit' className='block bg-green-600 px-2 py-1 rounded-lg text-white font-medium hover:bg-green-700'>Save</button>
-                <button type='button' onClick={ () => resetForm() } className='block bg-gray-600 px-2 py-1 rounded-lg text-white font-medium hover:bg-gray-700'>Clear</button>
+                <button type='submit' className={ `block ${ (selectedTask !== null) ? 'bg-blue-500' : 'bg-green-500' } px-2 py-1 rounded-lg
+                  text-white font-medium ${ (selectedTask !== null) ? 'hover:bg-blue-700' : 'hover:bg-green-700' }` }>
+                  { (selectedTask !== null) ? 'Edit' : 'Save' }
+                </button>
+                <button type='button' onClick={ () => clearForm() } className='block bg-gray-600 px-2 py-1 rounded-lg text-white font-medium hover:bg-gray-700'>Clear</button>
               </fieldset>
             </form>
             {/* End form task */}

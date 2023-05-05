@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Swal from 'sweetalert2'
+
 import { statusData } from '../helpers/statusData'
+import { taskStore } from '../store/taskStore'
 
 export const ListTask = () => {
-  const [tasks, setTasks] = useState([])
-
+  const { tasks, setTasks, setselectedTask } = taskStore();
+  
   const deleteTask = (index) => {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
-
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -30,16 +30,6 @@ export const ListTask = () => {
       }
     })
   }
-
-  const getTasks = () => {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
-    
-    setTasks(tasks)
-  }
-
-  useEffect(() => {
-    getTasks()
-  }, [])
   
   return (
     <>
@@ -69,7 +59,7 @@ export const ListTask = () => {
                             <td className='px-6 py-4'>{ (status[status.length - 1]) ? status[status.length - 1]['name'] : '-' }</td>
                             <td className='px-6 py-4'>
                               <div className='flex gap-2'>
-                                <button className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
+                                <button onClick={ () => setselectedTask(i) } className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
                                 <button onClick={ () => deleteTask(i) } className='bg-red-600 px-2 py-1 rounded-lg text-white'>Delete</button>
                               </div>
                             </td>
