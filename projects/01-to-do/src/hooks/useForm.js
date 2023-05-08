@@ -10,6 +10,12 @@ export const useForm = (initialState = {}) => {
     })
   }
 
+  const setValue = (task) => {
+    setvalueForm({
+      ...task
+    })
+  }
+
   const resetForm = () => {
     setvalueForm(initialState)
   }
@@ -17,6 +23,7 @@ export const useForm = (initialState = {}) => {
   return {
     valueForm,
     handleInputChange,
-    resetForm
+    resetForm,
+    setValue
   }
 }

@@ -1,26 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid';
+
 import { ListTask } from './ListTask'
 import { useForm } from '../hooks/useForm'
 import { statusData } from '../helpers/statusData';
 import { taskStore } from '../store/taskStore';
+import Swal from 'sweetalert2';
 
 export const FormTask = () => {
   const { tasks, selectedTask, setTasks, setselectedTask } = taskStore();
 
-  const { valueForm, handleInputChange, resetForm } = useForm({
+  const { valueForm, handleInputChange, resetForm, setValue } = useForm({
+    id: '',
     name: '',
     description: '',
     date_start: '',
     date_end: '',
     status: ''
   });
+
+  useEffect(() => {
+    if (selectedTask !== null) {
+      const task = tasks.find(task => task.id === selectedTask);
+
+      setValue(task);
+    }
+  }, [selectedTask])
   
 
-  const { name, description, date_start, date_end, status } = valueForm;
+  const { id: idTask, name, description, date_start, date_end, status } = valueForm;
 
+  // console.log(tasks.find(task => task.id === selectedTask));
   const handleSubmitForm = (event) => {
     event.preventDefault();
-
+    
     if (!name.length) {
       return
     } 
@@ -37,19 +50,32 @@ export const FormTask = () => {
       return
     }
 
-    const { id, ...data } = valueForm;
-    
-    // Save tasks
-    tasks.push(data)
-    setTasks(tasks)
-    
+    if (idTask) {
+      // Update task
+      const taskIndex = tasks.findIndex(task => task.id === idTask);
+      
+      tasks[taskIndex] = valueForm;
+      setTasks(tasks)
+      Swal.fire('Updated', 'Task updated succesfully', 'success')
+    } else {
+      // Create task
+      const id = uuidv4();
+      valueForm.id = id;
+      
+      // Save tasks
+      tasks.push(valueForm)
+      setTasks(tasks)
+      Swal.fire('Created', 'Task created succesfully', 'success')
+    }
+
+    setselectedTask(null)
     resetForm();
   }
 
   const clearForm = () => {
     resetForm()
     setselectedTask(null)
-  }
+  }  
   
   return (
     <>

@@ -19,7 +19,6 @@ export const ListTask = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         tasks.splice(index, 1)
-        localStorage.setItem('tasks', JSON.stringify(tasks))
         setTasks(tasks)
 
         Swal.fire(
@@ -53,13 +52,13 @@ export const ListTask = () => {
                         const status = statusData.filter(e => e.code == task.status);
 
                         return (
-                          <tr key={ i } className='border-b'>
+                          <tr key={ task.id } className='border-b'>
                             <td scope="row" className='px-6 py-4'>{ task.name }</td>
                             <td className='px-6 py-4'>{ task.date_start } | { task.date_end }</td>
                             <td className='px-6 py-4'>{ (status[status.length - 1]) ? status[status.length - 1]['name'] : '-' }</td>
                             <td className='px-6 py-4'>
                               <div className='flex gap-2'>
-                                <button onClick={ () => setselectedTask(i) } className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
+                                <button onClick={ () => setselectedTask(task.id) } className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
                                 <button onClick={ () => deleteTask(i) } className='bg-red-600 px-2 py-1 rounded-lg text-white'>Delete</button>
                               </div>
                             </td>
