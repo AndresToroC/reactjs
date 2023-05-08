@@ -81,7 +81,7 @@ export const FormTask = () => {
   
   return (
     <>
-      <div className='grid md:grid-cols-3 gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
         <div className='md:col-span-1'>
           {/* Card tasks */}
           <div className='bg-white border border-gray-200 rounded-lg p-6'>

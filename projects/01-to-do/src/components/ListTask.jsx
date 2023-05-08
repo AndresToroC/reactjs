@@ -34,45 +34,43 @@ export const ListTask = () => {
     <>
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
         <h5 className='mb-4 text-2xl font-bold text-center'>List Tasks</h5>
-        <div>
-          <div className='relative overflow-x-auto h-full'>
-            <table className='w-full text-sm text-center'>
-              <thead className='uppercase bg-gray-50'>
-                <tr>
-                  <th className='px-6 py-3'>Task</th>
-                  <th className='px-6 py-3'>Date</th>
-                  <th className='px-6 py-3'>Status</th>
-                  <th className='px-6 py-3'></th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  tasks.length ?
-                      tasks.map((task, i) => {
-                        const status = statusData.filter(e => e.code == task.status);
+        <div className='relative overflow-x-auto shadow-md'>
+          <table className='w-full text-sm text-center'>
+            <thead className='uppercase bg-gray-50'>
+              <tr>
+                <th className='px-6 py-3'>Task</th>
+                <th className='px-6 py-3'>Date</th>
+                <th className='px-6 py-3'>Status</th>
+                <th className='px-6 py-3'></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                tasks.length ?
+                    tasks.map((task, i) => {
+                      const status = statusData.filter(e => e.code == task.status);
 
-                        return (
-                          <tr key={ task.id } className='border-b'>
-                            <td scope="row" className='px-6 py-4'>{ task.name }</td>
-                            <td className='px-6 py-4'>{ task.date_start } | { task.date_end }</td>
-                            <td className='px-6 py-4'>{ (status[status.length - 1]) ? status[status.length - 1]['name'] : '-' }</td>
-                            <td className='px-6 py-4'>
-                              <div className='flex gap-2'>
-                                <button onClick={ () => setselectedTask(task.id) } className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
-                                <button onClick={ () => deleteTask(i) } className='bg-red-600 px-2 py-1 rounded-lg text-white'>Delete</button>
-                              </div>
-                            </td>
-                          </tr>
-                        )
-                      })
-                    :
-                      <tr className='border-b'>
-                        <td colSpan={ 4 } className='px-6 py-4'>There's not records</td>
-                      </tr>
-                }
-              </tbody>
-            </table>
-          </div>
+                      return (
+                        <tr key={ task.id } className='border-b'>
+                          <td  className='px-6 py-4'>{ task.name }</td>
+                          <td className='px-6 py-4'>{ task.date_start } | { task.date_end }</td>
+                          <td className='px-6 py-4'>{ (status[status.length - 1]) ? status[status.length - 1]['name'] : '-' }</td>
+                          <td className='px-6 py-4'>
+                            <div className='flex gap-2'>
+                              <button onClick={ () => setselectedTask(task.id) } className='bg-blue-600 px-2 py-1 rounded-lg text-white'>Edit</button>
+                              <button onClick={ () => deleteTask(i) } className='bg-red-600 px-2 py-1 rounded-lg text-white'>Delete</button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })
+                  :
+                    <tr className='border-b'>
+                      <td colSpan={ 4 } className='px-6 py-4'>There's not records</td>
+                    </tr>
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </>
