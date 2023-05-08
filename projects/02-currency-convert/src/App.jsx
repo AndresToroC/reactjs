@@ -12,7 +12,7 @@ function App() {
       </header>
 
       <main>
-        <div className="mx-auto p-6 lg:px-8">
+        <div className="mx-auto p-6 lg:px-8 max-w-7xl">
           <FormCurrency />
         </div>
       </main>
