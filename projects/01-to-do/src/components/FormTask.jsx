@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
 
 import { ListTask } from './ListTask'
 import { useForm } from '../hooks/useForm'
 import { statusData } from '../helpers/statusData';
 import { taskStore } from '../store/taskStore';
-import Swal from 'sweetalert2';
 
 export const FormTask = () => {
   const { tasks, selectedTask, setTasks, setselectedTask } = taskStore();
@@ -27,26 +27,28 @@ export const FormTask = () => {
     }
   }, [selectedTask])
   
-
   const { id: idTask, name, description, date_start, date_end, status } = valueForm;
 
-  // console.log(tasks.find(task => task.id === selectedTask));
   const handleSubmitForm = (event) => {
     event.preventDefault();
     
     if (!name.length) {
+      Swal.fire('', 'The name field is required', 'error')
       return
     } 
     
     if (!description.length) {
+      Swal.fire('', 'The description field is required', 'error')
       return
     }
 
     if (Date.parse(date_start) > Date.parse(date_end)) {
+      Swal.fire('', 'The start date is greater than the end date', 'error')
       return
     }
 
     if (!status.length) {
+      Swal.fire('', 'The status field is required', 'error')
       return
     }
 
@@ -88,25 +90,25 @@ export const FormTask = () => {
             <form onSubmit={ handleSubmitForm }>
               <fieldset className='mb-3'>
                 <label htmlFor='task' className='block font-medium mb-2'>Task</label>
-                <input type='text' id='task' name='name' value={ name } onChange={ handleInputChange } maxLength={ 30 } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' placeholder='New task' />
+                <input type='text' id='task' name='name' value={ name } onChange={ handleInputChange } maxLength={ 30 } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' placeholder='New task' required />
               </fieldset>
               <fieldset className='mb-3'>
                 <label htmlFor='description' className='block font-medium mb-2'>Description</label>
-                <textarea id='description' name='description' value={ description } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' rows='5' placeholder='Decription'></textarea>
+                <textarea id='description' name='description' value={ description } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' rows='5' placeholder='Decription' required></textarea>
               </fieldset>
               <div className='grid grid-cols-2 gap-4 mb-3'>
                 <fieldset className='mb-3'>
                   <label htmlFor='date_start' className='block font-medium mb-2'>Date start</label>
-                  <input type='date' id='date_start' name='date_start' value={ date_start } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' placeholder='New task' />
+                  <input type='date' id='date_start' name='date_start' value={ date_start } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' required />
                 </fieldset>
                 <fieldset className='mb-3'>
                   <label htmlFor='date_end' className='block font-medium mb-2'>Date end</label>
-                  <input type='date' id='date_end' name='date_end' value={ date_end } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' placeholder='New task' />
+                  <input type='date' id='date_end' name='date_end' value={ date_end } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-md text-gray-900 text-sm w-full' required />
                 </fieldset>
               </div>
               <fieldset className='mb-3'>
                 <label htmlFor='status' className='block font-medium mb-2'>Status</label>
-                <select name='status' id='status' value={ status } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-lg text-sm w-full'>
+                <select name='status' id='status' value={ status } onChange={ handleInputChange } className='block bg-gray-50 border border-gray-300 p-2.5 rounded-lg text-sm w-full' required>
                   <option disabled={ true } value=''>Select a choice</option>
                   {
                     statusData.map(status => {
