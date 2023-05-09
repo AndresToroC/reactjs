@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const SelectCurrency = ({ name, label, value, selectOnChange }) => {
+export const SelectCurrency = ({ name, label, value, selectOnChange, required }) => {
   const API_URL = import.meta.env.VITE_API_URL
   const API_TOKEN = import.meta.env.VITE_API_TOKEN
 
@@ -28,7 +28,7 @@ export const SelectCurrency = ({ name, label, value, selectOnChange }) => {
     <>
       <fieldset>
         <label htmlFor={ name } className='block font-medium mb-2'>{ label }</label>
-        <select name={ name } id={ name } value={ value } onChange={ selectOnChange } className='block bg-gray-100 border border-gray-300 p-2.5 rounded-md w-full text-sm'>
+        <select name={ name } id={ name } value={ value } onChange={ selectOnChange } required={ required } className='block bg-gray-100 border border-gray-300 p-2.5 rounded-md w-full text-sm'>
           <option disabled value=''>Select a choice</option>
           {
             countries.map((country, index) => {
