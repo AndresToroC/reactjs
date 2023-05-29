@@ -1,11 +1,13 @@
-
+import { Header } from './components/Header';
+import { DarkModeProvider } from './context/DarkModeProvider';
 
 function App() {
-
   return (
-    <h1 className="text-3xl font-bold ">
-      Hello world!
-    </h1>
+    <>
+      <DarkModeProvider>
+        <Header />
+      </DarkModeProvider>
+    </>
   )
 }
 
