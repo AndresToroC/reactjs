@@ -1,4 +1,5 @@
 import { Header } from './components/Header';
+import { PasswordGenerator } from './components/PasswordGenerator';
 import { DarkModeProvider } from './context/DarkModeProvider';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <DarkModeProvider>
         <Header />
+        <PasswordGenerator />
       </DarkModeProvider>
     </>
   )
