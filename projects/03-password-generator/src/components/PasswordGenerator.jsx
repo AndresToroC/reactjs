@@ -1,21 +1,35 @@
-import { IconCopy, IconRefresh } from '@tabler/icons-react'
 import React, { useState } from 'react'
+import { IconCopy, IconRefresh } from '@tabler/icons-react'
+
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export const PasswordGenerator = () => {
   const [lengthPassword, setLengthPassword] = useState(12)
+  const [password, setPassword] = useState('asjhgdasdhfjg6468');
+
+  const copyPassword = () => {
+    navigator.clipboard.writeText(password)
+
+    toast.success('Password copied successfully', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1500
+    });
+  }
 
   return (
     <main>
-      <div className='mx-auto p-6 lg:px-48 max-w-7xl'>
+      <ToastContainer />
+      <div className='mx-auto py-12 lg:px-48 max-w-6xl'>
         <div className='text-center mb-6'>
           <h2 className='font-bold text-4xl capitalize'>Generate a random and secure password</h2>
         </div>
         <div className='bg-white border border-gray-200 rounded-lg p-8 mb-6'>
           <div className='flex justify-between'>
-            <p className='font-bold text-3xl'>asjhgdasdhfjg6468</p>
+            <p className='font-bold text-3xl'>{ password }</p>
             <div className='flex gap-4'>
-              <IconCopy size={ 36 } />
-              <IconRefresh size={ 36 } />
+              <IconCopy size={ 36 } onClick={ copyPassword } style={{ cursor: 'pointer' }} />
+              <IconRefresh size={ 36 } style={{ cursor: 'pointer' }} />
             </div>
           </div>
         </div>
@@ -56,6 +70,11 @@ export const PasswordGenerator = () => {
               </div>
             </div>
           </form>
+        </div>
+        <div className='mt-4 text-center'>
+          <button className='bg-blue-700 hover:bg-blue-600 p-4 rounded-full text-white font-bold' onClick={ copyPassword }>
+            Copy Password
+          </button>
         </div>
       </div>
     </main>
