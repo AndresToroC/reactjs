@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IconCopy, IconRefresh } from '@tabler/icons-react'
 
 import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const PasswordGenerator = () => {
   const [lengthPassword, setLengthPassword] = useState(12)
-  const [password, setPassword] = useState('asjhgdasdhfjg6468');
+  const [password, setPassword] = useState();
 
   const copyPassword = () => {
     navigator.clipboard.writeText(password)
@@ -17,6 +17,23 @@ export const PasswordGenerator = () => {
     });
   }
 
+  const generatePassword = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+    let passwordRandom = ''; 
+
+    for (let index = 0; index < lengthPassword; index++) {
+      const random = Math.floor(Math.random() * chars.length)
+      passwordRandom += chars.charAt(random); 
+    }
+
+    setPassword(passwordRandom)
+  }
+
+  useEffect(() => {
+    generatePassword();
+  }, [])
+  
+
   return (
     <main>
       <ToastContainer />
@@ -26,10 +43,10 @@ export const PasswordGenerator = () => {
         </div>
         <div className='bg-white border border-gray-200 rounded-lg p-8 mb-6'>
           <div className='flex justify-between'>
-            <p className='font-bold text-3xl'>{ password }</p>
+            <p className='font-bold text-3xl flex-none w-3/5 md:w-3/4 whitespace-nowrap text-ellipsis overflow-hidden'>{ password }</p>
             <div className='flex gap-4'>
               <IconCopy size={ 36 } onClick={ copyPassword } style={{ cursor: 'pointer' }} />
-              <IconRefresh size={ 36 } style={{ cursor: 'pointer' }} />
+              <IconRefresh size={ 36 } onClick={ generatePassword } style={{ cursor: 'pointer' }} />
             </div>
           </div>
         </div>
