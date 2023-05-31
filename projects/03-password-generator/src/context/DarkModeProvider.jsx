@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { createContext } from 'react'
 
@@ -15,6 +15,15 @@ const DarkModeProvider = (props) => {
     localStorage.setItem('theme', newTheme)
   }
 
+  useEffect(() => {
+    // Add class dark in html
+    if (!theme) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme])
+  
   return (
     <DarkModeContext.Provider value={{ theme, toogleDarkMode }}>
       { props.children }

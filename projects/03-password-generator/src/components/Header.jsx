@@ -6,7 +6,7 @@ export const Header = () => {
   const { theme, toogleDarkMode } = useContext(DarkModeContext)
   
   return (
-    <header className={ theme ? `bg-white border border-b-gray-300 text-black` : `bg-slate-800 text-white` }>
+    <header className='bg-white text-black dark:bg-slate-800 dark:text-white'>
       <nav className="p-4">
         <div className='flex justify-between'>
           {/* Logo */}
