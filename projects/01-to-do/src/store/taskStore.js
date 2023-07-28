@@ -1,21 +1,20 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
 
-// export const taskStore = create((set) => ({
-//   tasks: [],
-//   setTasks: (tasksNew) => set(() => ({ tasks: tasksNew }))
-// }))
+const handleRehydrate = async () => {
+  await taskStore.persist.rehydrate()
+}
 
 export const taskStore = create(
   persist((set) => ({
     tasks: [],
     selectedTask: null,
     setTasks: (tasksNew) => set(() => ({ tasks: tasksNew })),
-    setselectedTask: (taskSelected) => set(() => ({ selectedTask: taskSelected }))
+    setselectedTask: (taskSelected) => set(() => ({ selectedTask: taskSelected })),
+    onRehydrateStorage: () => handleRehydrate(),
   }),
   {
     name: 'tasks',
-    storage: createJSONStorage(() => sessionStorage),
     partialize: (state) => ({ tasks: state.tasks }),
   }
   )

@@ -8,7 +8,7 @@ import { statusData } from '../helpers/statusData';
 import { taskStore } from '../store/taskStore';
 
 export const FormTask = () => {
-  const { tasks, selectedTask, setTasks, setselectedTask } = taskStore();
+  const { tasks, selectedTask, setTasks, setselectedTask, onRehydrateStorage } = taskStore();
 
   const { valueForm, handleInputChange, resetForm, setValue } = useForm({
     id: '',
@@ -18,6 +18,14 @@ export const FormTask = () => {
     date_end: '',
     status: ''
   });
+
+  useEffect(() => {
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'tasks') {
+        onRehydrateStorage()
+      }
+    })
+  }, [])
 
   useEffect(() => {
     if (selectedTask !== null) {
