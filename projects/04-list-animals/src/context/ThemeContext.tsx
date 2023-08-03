@@ -1,13 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
-
-export interface ThemeContextInterface {
-  theme: boolean,
-  handleChangeTheme: () => void
-}
-
-interface Props {
-  children: React.ReactNode
-}
+import { Props, ThemeContextInterface } from '../types/interfaceContext.d'
 
 export const ThemeContext = createContext<ThemeContextInterface | null>(null)
 

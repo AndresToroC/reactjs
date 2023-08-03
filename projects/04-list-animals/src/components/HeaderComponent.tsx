@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { ThemeContext, ThemeContextInterface } from '../context/ThemeContext'
+import { ThemeContext } from '../context/ThemeContext'
+import { ThemeContextInterface } from '../types/interfaceContext.d'
 
 import SunSvg from '../assets/sun.svg'
 import MoonSvg from '../assets/moon.svg'
