@@ -1,12 +1,14 @@
 import { User } from '../../types/UserTypes'
+import { TrashIcon } from '../Icons'
 
 interface Props {
-  user: User
+  user: User,
+  deleteUser: (uid: string) => void
 }
 
-export const UserItem: React.FC<Props> = ({ user }) => {
+export const UserItem: React.FC<Props> = ({ user, deleteUser }) => {
   return (
-    <figure className='border border-gray-100 p-4 rounded-md md:flex dark:border-slate-700'>
+    <figure className='relative border border-gray-100 p-4 rounded-md md:flex dark:border-slate-700'>
       {/* <UserIcon /> */}
       <img className='w-24 h-auto rounded-lg mx-auto md:mx-0' src='https://tailwindcss.com/_next/static/media/sarah-dayan.de9b3815.jpg'/>
       <div className='p-4 text-center md:text-left'>
@@ -20,6 +22,11 @@ export const UserItem: React.FC<Props> = ({ user }) => {
             </a>
           ))
         } */}
+      </div>
+      <div className='absolute top-4 right-4'>
+        <button onClick={ () => deleteUser(user.uid) }>
+          <TrashIcon />
+        </button>
       </div>
     </figure>
   )

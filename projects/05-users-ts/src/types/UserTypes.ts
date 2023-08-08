@@ -1,7 +1,7 @@
-interface LinksUser {
-  name: string,
-  url: string
-}
+// interface LinksUser {
+//   name: string,
+//   url: string
+// }
 
 export interface User {
   uid: string,
@@ -10,6 +10,6 @@ export interface User {
   profession: string,
   description: string,
   birthDay: string,
-  hobbies: string[],
-  links: LinksUser[],
+  // hobbies: string[],
+  // links: LinksUser[],
 }

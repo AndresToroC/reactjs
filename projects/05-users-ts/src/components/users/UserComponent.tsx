@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { UserForm } from './UserForm'
 import { UserList } from './UserList'
 
+import { toast } from 'react-toastify';
+import { User } from '../../types/UserTypes';
+
 const usersData = [
   {
     "uid": "u001",
@@ -9,13 +12,7 @@ const usersData = [
     "email": "juan@example.com",
     "profession": "Ingeniero de Software",
     "description": "Apasionado por la tecnología y el desarrollo web.",
-    "birthDay": "1990-05-15",
-    "hobbies": ["Fotografía", "Viajar", "Cocinar"],
-    "links": [
-      { "name": "Sitio web personal", "url": "https://www.juanperez.com" },
-      { "name": "GitHub", "url": "https://github.com/juanperez" },
-      { "name": "LinkedIn", "url": "https://www.linkedin.com/in/juanperez" }
-    ]
+    "birthDay": "1990-05-15"
   },
   {
     "uid": "u002",
@@ -23,13 +20,7 @@ const usersData = [
     "email": "maria@example.com",
     "profession": "Diseñadora Gráfica",
     "description": "Amante del arte y el diseño creativo.",
-    "birthDay": "1985-09-22",
-    "hobbies": ["Pintura", "Leer", "Bailar"],
-    "links": [
-      { "name": "Portafolio", "url": "https://www.marialopezdesign.com" },
-      { "name": "Behance", "url": "https://www.behance.net/marialopez" },
-      { "name": "Instagram", "url": "https://www.instagram.com/marialopezart" }
-    ]
+    "birthDay": "1985-09-22"
   },
   {
     "uid": "u003",
@@ -37,12 +28,7 @@ const usersData = [
     "email": "carlos@example.com",
     "profession": "Contador",
     "description": "Apasionado por los números y las finanzas.",
-    "birthDay": "1988-11-30",
-    "hobbies": ["Jugar fútbol", "Ver películas", "Hacer senderismo"],
-    "links": [
-      { "name": "Perfil profesional", "url": "https://www.linkedin.com/in/carlos-gomez" },
-      { "name": "Twitter", "url": "https://twitter.com/carlosgomez" }
-    ]
+    "birthDay": "1988-11-30"
   },
   {
     "uid": "u004",
@@ -50,12 +36,7 @@ const usersData = [
     "email": "ana@example.com",
     "profession": "Médico",
     "description": "Comprometida con la salud y el bienestar de sus pacientes.",
-    "birthDay": "1975-06-10",
-    "hobbies": ["Tocar piano", "Hacer yoga", "Leer libros de medicina"],
-    "links": [
-      { "name": "Consultorio médico", "url": "https://www.anamartinezmd.com" },
-      { "name": "Instagram", "url": "https://www.instagram.com/anamartinezmd" }
-    ]
+    "birthDay": "1975-06-10"
   },
   {
     "uid": "u005",
@@ -63,12 +44,7 @@ const usersData = [
     "email": "pedro@example.com",
     "profession": "Chef",
     "description": "Apasionado por la gastronomía y la comida deliciosa.",
-    "birthDay": "1983-04-25",
-    "hobbies": ["Cocinar", "Viajar", "Practicar deportes acuáticos"],
-    "links": [
-      { "name": "Restaurante", "url": "https://www.pedroramirezchef.com" },
-      { "name": "YouTube", "url": "https://www.youtube.com/pedroramirez" }
-    ]
+    "birthDay": "1983-04-25"
   },
   {
     "uid": "u006",
@@ -76,22 +52,31 @@ const usersData = [
     "email": "laura@example.com",
     "profession": "Arquitecta",
     "description": "Apasionada por el diseño y la creación de espacios.",
-    "birthDay": "1992-08-18",
-    "hobbies": ["Dibujar", "Leer sobre arquitectura", "Bailar salsa"],
-    "links": [
-      { "name": "Portafolio", "url": "https://www.lauragarciaarq.com" },
-      { "name": "Instagram", "url": "https://www.instagram.com/lauragarciaarq" }
-    ]
+    "birthDay": "1992-08-18"
   }
 ]
 
 export const UserComponent = () => {
-  const [users] = useState(usersData)
+  const [users, setUsers] = useState(usersData)
+
+  const handleDeleteUser = (uid: string) => {
+    const newUsers = users.filter(user => user.uid !== uid)
+
+    setUsers(newUsers)
+    toast.success('User deleted successfully')
+  }
+
+  const handleAddUser = (user: User) => {
+    setUsers([
+      ...users,
+      user
+    ])
+  }
 
   return (
     <div className='grid grid-cols-1 gap-4'>
-      <UserForm />
-      <UserList users={ users } />
+      <UserForm handleAddUser={ handleAddUser } />
+      <UserList users={ users } handleDeleteUser={ handleDeleteUser } />
     </div>
   )
 }
