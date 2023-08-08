@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { uid } from 'uid';
 import { toast } from 'react-toastify';
 
 import { User } from '../../types/UserTypes'
@@ -13,10 +14,13 @@ const initial = {
 }
 
 interface Props {
-  handleAddUser: (user: User) => void
+  userSelected: User | null,
+  handleAddUser: (user: User) => void,
+  handleSelectedEditClear: () => void,
+  handleUpdateUser: (user: User) => void
 }
 
-export const UserForm: React.FC<Props> = ({ handleAddUser }) => {
+export const UserForm: React.FC<Props> = ({ userSelected, handleAddUser, handleSelectedEditClear, handleUpdateUser }) => {
   const [valuesForm, setValuesForm] = useState<User>(initial)
 
   const handleOnChange = (e: React.SyntheticEvent) => {
@@ -40,15 +44,31 @@ export const UserForm: React.FC<Props> = ({ handleAddUser }) => {
 
     const user = valuesForm
 
-    handleAddUser(user)
-    setValuesForm(initial)
+    if (!userSelected) {
+      user.uid = uid()
+      handleAddUser(user)
 
-    toast.error('User created successfully')
+      toast.success('User created successfully')
+    } else {
+      handleUpdateUser(user)
+
+      toast.success('User updated successfully')
+    }
+
+    setValuesForm(initial)
   }
+
+  useEffect(() => {
+    if (userSelected) {
+      setValuesForm(userSelected)
+    } else {
+      setValuesForm(initial)
+    }
+  }, [userSelected])
   
   return (
     <section className='border border-gray-200 p-4 rounded-lg dark:border-slate-700'>
-      <h5 className='font-medium text-2xl'>Form user</h5>
+      <h5 className='font-medium text-2xl'>{ userSelected ? 'Update User' : 'Create User' }</h5>
       <hr className='border dark:border-gray-700' />
       <form onSubmit={ handleSubmit } className='mt-4'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
@@ -91,10 +111,17 @@ export const UserForm: React.FC<Props> = ({ handleAddUser }) => {
             <input type='text' id='links' value={ links } onChange={ handleOnChange } placeholder='Link of your Twitter' name='links[]' className='block w-full border boder-gray-100 rounded-md bg-gray-50 text-sm px-4 py-2 dark:bg-gray-700 dark:border-slate-700' />
           </fieldset>
         </div> */}
-        <div className='mt-4'>
-          <button className='w-full bg-blue-700 text-white font-medium px-4 py-2 rounded-xl hover:bg-blue-600'>
-            Save
+        <div className={`mt-4 grid ${ userSelected ? 'grid-cols-2' : 'grid-cols-1' } gap-4`}>
+          <button type='submit' className='w-full bg-blue-700 text-white font-medium px-4 py-2 rounded-xl hover:bg-blue-600'>
+            { userSelected ? 'Update' : 'Save' }
           </button>
+          {
+            userSelected
+              ? <button type='button' onClick={ handleSelectedEditClear } className='w-full bg-gray-700 text-white font-medium px-4 py-2 rounded-xl hover:bg-gray-600'>
+                  Cancel
+                </button>
+              : ''
+          }
         </div>
       </form>
     </section>

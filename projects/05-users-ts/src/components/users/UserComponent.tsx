@@ -58,6 +58,7 @@ const usersData = [
 
 export const UserComponent = () => {
   const [users, setUsers] = useState(usersData)
+  const [userSelected, setUserSelected] = useState<User | null>(null)
 
   const handleDeleteUser = (uid: string) => {
     const newUsers = users.filter(user => user.uid !== uid)
@@ -73,10 +74,30 @@ export const UserComponent = () => {
     ])
   }
 
+  const handleSelectedEdit = (id: string) => {
+    const user = users.find(user => user.uid === id)
+
+    if (user) {
+      setUserSelected(user)
+    }
+  }
+
+  const handleSelectedEditClear = () => {
+    setUserSelected(null)
+  }
+
+  const handleUpdateUser = (user: User) => {
+    const userFind = users.findIndex(userI => userI.uid === user.uid)
+    
+    users[userFind] = user
+    setUsers(users)
+    setUserSelected(null)
+  }
+
   return (
     <div className='grid grid-cols-1 gap-4'>
-      <UserForm handleAddUser={ handleAddUser } />
-      <UserList users={ users } handleDeleteUser={ handleDeleteUser } />
+      <UserForm handleAddUser={ handleAddUser } userSelected={ userSelected } handleSelectedEditClear={ handleSelectedEditClear } handleUpdateUser={ handleUpdateUser } />
+      <UserList users={ users } handleDeleteUser={ handleDeleteUser } handleSelectedEdit={ handleSelectedEdit } />
     </div>
   )
 }

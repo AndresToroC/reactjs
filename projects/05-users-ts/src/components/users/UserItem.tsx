@@ -1,12 +1,13 @@
 import { User } from '../../types/UserTypes'
-import { TrashIcon } from '../Icons'
+import { EditIcon, TrashIcon } from '../Icons'
 
 interface Props {
   user: User,
-  deleteUser: (uid: string) => void
+  deleteUser: (uid: string) => void,
+  handleSelectedEdit: (id: string) => void
 }
 
-export const UserItem: React.FC<Props> = ({ user, deleteUser }) => {
+export const UserItem: React.FC<Props> = ({ user, deleteUser, handleSelectedEdit }) => {
   return (
     <figure className='relative border border-gray-100 p-4 rounded-md md:flex dark:border-slate-700'>
       {/* <UserIcon /> */}
@@ -24,6 +25,9 @@ export const UserItem: React.FC<Props> = ({ user, deleteUser }) => {
         } */}
       </div>
       <div className='absolute top-4 right-4'>
+        <button onClick={ () => handleSelectedEdit(user.uid) }>
+          <EditIcon />
+        </button>
         <button onClick={ () => deleteUser(user.uid) }>
           <TrashIcon />
         </button>
