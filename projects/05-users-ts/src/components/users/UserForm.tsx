@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { uid } from 'uid';
 import { toast } from 'react-toastify';
 
 import { User } from '../../types/UserTypes'
+import { UserContext } from '../../context/UserContext';
+import { UserContextType } from '../../types/ContextTypes';
 
 const initial = {
   uid: '',
@@ -13,14 +15,9 @@ const initial = {
   birthDay: ''
 }
 
-interface Props {
-  userSelected: User | null,
-  handleAddUser: (user: User) => void,
-  handleSelectedEditClear: () => void,
-  handleUpdateUser: (user: User) => void
-}
+export const UserForm = () => {
+  const { userSelected, handleAddUser, handleSelectedEditClear, handleUpdateUser } = useContext(UserContext) as UserContextType
 
-export const UserForm: React.FC<Props> = ({ userSelected, handleAddUser, handleSelectedEditClear, handleUpdateUser }) => {
   const [valuesForm, setValuesForm] = useState<User>(initial)
 
   const handleOnChange = (e: React.SyntheticEvent) => {

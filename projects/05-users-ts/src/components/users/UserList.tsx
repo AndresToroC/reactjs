@@ -1,14 +1,11 @@
-import React from 'react'
-import { User } from '../../types/UserTypes'
+import { useContext } from 'react'
 import { UserItem } from './UserItem';
+import { UserContext } from '../../context/UserContext';
+import { UserContextType } from '../../types/ContextTypes';
 
-interface Props {
-  users: User[],
-  handleDeleteUser: (id: string) => void,
-  handleSelectedEdit: (id: string) => void
-}
+export const UserList = () => {
+  const { users } = useContext(UserContext) as UserContextType
 
-export const UserList: React.FC<Props> = ({ users, handleDeleteUser, handleSelectedEdit }) => {
   return (
     <section className='border border-gray-200 p-4 rounded-lg dark:border-slate-700'>
       <h5 className='font-medium text-2xl'>List users</h5>
@@ -17,7 +14,7 @@ export const UserList: React.FC<Props> = ({ users, handleDeleteUser, handleSelec
           (users.length) 
             ?
               users.map(user => (
-                <UserItem key={ user.uid } user={ user } deleteUser={ handleDeleteUser } handleSelectedEdit={ handleSelectedEdit } />
+                <UserItem key={ user.uid } user={ user } />
               ))
             : 'Not found registers'
         }
