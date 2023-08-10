@@ -1,15 +1,13 @@
-import { useContext } from 'react'
 import { User } from '../../types/UserTypes'
 import { EditIcon, TrashIcon } from '../Icons'
-import { UserContext } from '../../context/UserContext'
-import { UserContextType } from '../../types/ContextTypes'
+import { useUserContext } from '../../hook/useUserContext'
 
 interface Props {
   user: User
 }
 
 export const UserItem: React.FC<Props> = ({ user }) => {
-  const { handleDeleteUser, handleSelectedEdit } = useContext(UserContext) as UserContextType
+  const { handleDeleteUser, handleSelectedEdit } = useUserContext()
 
   return (
     <figure className='relative border border-gray-100 p-4 rounded-md md:flex dark:border-slate-700'>

@@ -1,10 +1,8 @@
-import { useContext } from 'react'
 import { UserItem } from './UserItem';
-import { UserContext } from '../../context/UserContext';
-import { UserContextType } from '../../types/ContextTypes';
+import { useUserContext } from '../../hook/useUserContext';
 
 export const UserList = () => {
-  const { users } = useContext(UserContext) as UserContextType
+  const { users } = useUserContext()
 
   return (
     <section className='border border-gray-200 p-4 rounded-lg dark:border-slate-700'>

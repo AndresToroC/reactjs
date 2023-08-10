@@ -1,10 +1,9 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { uid } from 'uid';
 import { toast } from 'react-toastify';
 
 import { User } from '../../types/UserTypes'
-import { UserContext } from '../../context/UserContext';
-import { UserContextType } from '../../types/ContextTypes';
+import { useUserContext } from '../../hook/useUserContext';
 
 const initial = {
   uid: '',
@@ -16,7 +15,7 @@ const initial = {
 }
 
 export const UserForm = () => {
-  const { userSelected, handleAddUser, handleSelectedEditClear, handleUpdateUser } = useContext(UserContext) as UserContextType
+  const { userSelected, handleAddUser, handleSelectedEditClear, handleUpdateUser } = useUserContext()
 
   const [valuesForm, setValuesForm] = useState<User>(initial)
 
