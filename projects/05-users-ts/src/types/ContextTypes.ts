@@ -1,6 +1,6 @@
 import { User } from "./UserTypes";
 
-export interface Theme {
+export interface ThemeContextType {
   theme: boolean,
   handleChangeTheme: () => void
 }

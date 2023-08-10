@@ -1,6 +1,4 @@
-import { useContext } from "react"
-import { ThemeContext } from "../context/ThemeContext"
-import { Theme } from "../types/ContextTypes"
+import { useThemeContext } from '../hook/useThemeContext'
 
 export const SunIcon = () => {
   return (
@@ -34,7 +32,7 @@ export const UserIcon = () => {
 }
 
 export const TrashIcon = () => {
-  const { theme } = useContext(ThemeContext) as Theme
+  const { theme } = useThemeContext()
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.5" stroke={`${ theme ? '#ffffff' : '#000000' }`} fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -49,7 +47,7 @@ export const TrashIcon = () => {
 }
 
 export const EditIcon = () => {
-  const { theme } = useContext(ThemeContext) as Theme
+  const { theme } = useThemeContext()
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-edit" width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.5" stroke={`${ theme ? '#ffffff' : '#000000' }`} fill="none" strokeLinecap="round" strokeLinejoin="round">

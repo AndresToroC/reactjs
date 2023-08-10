@@ -1,10 +1,8 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
-import { Theme as ThemeType } from '../types/ContextTypes'
+import { useThemeContext } from '../hook/useThemeContext'
 import { MoonIcon, SunIcon } from './Icons'
 
 export const Header = () => {
-  const { theme, handleChangeTheme } = useContext(ThemeContext) as ThemeType
+  const { theme, handleChangeTheme } = useThemeContext()
 
   return (
     <header className='p-4'>
