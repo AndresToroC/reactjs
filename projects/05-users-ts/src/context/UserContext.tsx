@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import { toast } from 'react-toastify';
 
 import { User } from '../types/UserTypes'
@@ -59,6 +59,15 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
 
     localStorage.setItem('users', JSON.stringify(newUsers))
   }
+
+  useEffect(() => {
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'users') {
+        const data = JSON.parse(localStorage.getItem('users') || JSON.stringify(usersData))
+        setUsers(data)
+      }
+    })
+  }, [])
   
   return (
     <UserContext.Provider value={{ 

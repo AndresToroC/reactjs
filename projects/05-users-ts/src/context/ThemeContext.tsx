@@ -24,6 +24,13 @@ export const ThemeProvider: React.FC<Props> = ({ children }) => {
     } else {
       document.documentElement.classList.remove('dark')
     }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        const themeLocalData = localStorage.getItem('theme') === 'true' ? true : false
+        setTheme(themeLocalData)
+      }
+    })
   }, [theme])
   
 
