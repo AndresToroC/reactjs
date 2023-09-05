@@ -12,13 +12,22 @@ export const Calculator = () => {
   }
 
   const handleAddSymbol = (symbol: string) => {
+    console.log(typeof number);
+    
+    const numberClear = number.replace(/\s+/g, '')
+    const lastCharacter = numberClear.charAt(numberClear.length - 1)
+    
     if (!number && symbol === '.') setNumber(`0${ symbol }`)
     if (!number) return
+    
+    if (lastCharacter === '.' || !Number.isFinite(parseInt(lastCharacter))) {
+      return
+    }
 
     if (symbol !== '.') {
-      setNumber(number + ` ${ symbol } `)
+      setNumber(`${ number } ${ symbol } `)
     } else {      
-      setNumber(number + symbol)
+      setNumber(`${ number } ${ symbol } `)
     }
   }
 
@@ -28,10 +37,18 @@ export const Calculator = () => {
   }
 
   const handleCalculate = () => {
-    const result = eval(number)
+    const result = eval(number).toString()
 
-    setOperation(number)
-    setNumber(result)
+    if (result) {
+      setOperation(number)
+      setNumber(result)
+    }
+  }
+
+  const handleDeleteNumber = () => {
+    const newValue = number.slice(0, number.length - 1)
+
+    setNumber(newValue)
   }
 
   return (
@@ -47,7 +64,7 @@ export const Calculator = () => {
         </section>
         <section className='col-span-4 grid grid-cols-4 gap-4'>
           <button className='bg-slate-100 dark:bg-slate-600 rounded-md px-4 py-2 font-bold col-span-2' onClick={ handleClearCalculator }>C</button>
-          <button className='bg-slate-100 dark:bg-slate-600 rounded-md px-4 py-2 font-bold'>DEL</button>
+          <button className='bg-slate-100 dark:bg-slate-600 rounded-md px-4 py-2 font-bold' onClick={ handleDeleteNumber }>DEL</button>
           <button className='bg-slate-100 dark:bg-slate-600 rounded-md px-4 py-2 font-bold' onClick={ () => handleAddSymbol('/') }>/</button>
         </section>
         <section className='col-span-4 grid grid-cols-4 gap-4'>
