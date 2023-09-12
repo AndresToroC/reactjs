@@ -5,19 +5,28 @@ export const Header = () => {
   const { theme, handleChangeTheme } = useThemeContext()
 
   return (
-    <header className='p-4'>
-      <nav className='flex justify-center'>
-        <p className='text-2xl font-bold'>Quiz</p>
-        <div className='group absolute right-4 p-2.5 -m-2.5'>
+    <header>
+      <div className='flex gap-4'>
+        <section className='flex flex-1'></section>
+        <section className='flex flex-1 justify-end md:justify-center'>
+          <nav className='hidden md:block'>
+            <ul className='flex gap-3 rounded-full bg-white/90 border border-gray-500 p-3 dark:bg-zinc-800'>
+              <li>Datos</li>
+              <li>Examanes</li>
+              <li>Resultados</li>
+            </ul>
+          </nav>
+        </section>
+        <section className='flex flex-1 justify-end'>
           <button onClick={ handleChangeTheme }>
-            {
-              theme
-                ? <SunIcon />
-                : <MoonIcon />
-            }
-          </button>
-        </div>
-      </nav>
+             {
+               theme
+                 ? <SunIcon />
+                 : <MoonIcon />
+             }
+           </button>
+        </section>
+      </div>
     </header>
   )
 }
