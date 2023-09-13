@@ -1,17 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-
-export interface ThemeContextType {
-  theme: boolean,
-  handleChangeTheme: () => void
-}
-
-interface Props {
-  children: React.ReactNode
-}
+import { PropsContext, ThemeContextType } from '../types/types';
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
-export const ThemeProvider: React.FC<Props> = ({ children }) => {
+export const ThemeProvider: React.FC<PropsContext> = ({ children }) => {
   const themeLocal = localStorage.getItem('theme') === 'true' ? true : false
   const [theme, setTheme] = useState(themeLocal)
 

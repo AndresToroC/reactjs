@@ -1,22 +1,11 @@
 import { useState } from 'react';
 import { useUserContext } from '../../hook/useUserContext';
-
-const initial = {
-  document: '',
-  email: '',
-  // isAuth: 'false'
-}
-
-interface User {
-  document: string,
-  email: string,
-  // isAuth: false
-}
+import { UserInitial, UserType } from '../../types/types';
 
 export const AuthComponent = () => {
   const { handleLogin } = useUserContext();
 
-  const [valuesForm, setValuesForm] = useState<User>(initial)
+  const [valuesForm, setValuesForm] = useState<UserType>(UserInitial)
 
   const handleInputChange = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement
