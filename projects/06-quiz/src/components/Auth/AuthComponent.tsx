@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserContext } from '../../hook/useUserContext';
 import { UserInitial, UserType } from '../../types/types';
+import { useNavigate  } from "react-router-dom";
 
 export const AuthComponent = () => {
-  const { handleLogin } = useUserContext();
+  const navigate = useNavigate();
+  const { user, handleLogin } = useUserContext();
 
   const [valuesForm, setValuesForm] = useState<UserType>(UserInitial)
 
@@ -23,6 +25,12 @@ export const AuthComponent = () => {
 
     handleLogin(valuesForm)
   }
+  
+  useEffect(() => {
+    if (user.isAuth) {
+      navigate('/quiz')
+    }
+  }, [user, navigate])
 
   return (
     <>

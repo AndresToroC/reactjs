@@ -14,6 +14,7 @@ export type UserType = {
 }
 
 export interface UserContextType {
+  user: UserType,
   handleLogin: (User: UserType) => void
 }
 

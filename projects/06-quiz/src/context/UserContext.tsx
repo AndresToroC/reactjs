@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import { PropsContext, UserType, UserContextType, UserInitial } from '../types/types'
 
 export const UserContext = createContext<UserContextType | null>(null)
@@ -15,16 +15,8 @@ export const UserProvider: React.FC<PropsContext> = ({ children }) => {
     setUser(userData)
   }
 
-  useEffect(() => {
-    if (user.isAuth) {
-      console.log(user);
-      
-    }
-  }, [user])
-  
-
   return (
-    <UserContext.Provider value={{ handleLogin }}>
+    <UserContext.Provider value={{ user, handleLogin }}>
       { children }
     </UserContext.Provider>
   )
