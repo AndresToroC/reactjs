@@ -12,6 +12,8 @@ export const UserProvider: React.FC<PropsContext> = ({ children }) => {
       userData.isAuth = true
     }
 
+    localStorage.setItem('user', JSON.stringify(userData))
+
     setUser(userData)
   }
 
