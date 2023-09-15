@@ -9,7 +9,7 @@ import { useUserContext } from '../hook/useUserContext';
 import { PublicRouter } from './PublicRouter';
 
 export const Router = () => {
-  const { user } = useUserContext()
+  const { user } = useUserContext() 
 
   const router = createBrowserRouter([
     {
