@@ -1,0 +1,51 @@
+{
+    "name": "Quiz de PHP",
+    "description": "Un quiz para poner a prueba tus conocimientos en PHP.",
+    "questions": [
+        {
+            "question": "¿Qué significa PHP?",
+            "answers": [
+                {"answer": "Personal Home Page", "isCorrect": false},
+                {"answer": "PHP: Hypertext Preprocessor", "isCorrect": false},
+                {"answer": "Hypertext Preprocessor", "isCorrect": true},
+                {"answer": "PHP: Hyperlink and Text Processing", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es el operador de concatenación en PHP?",
+            "answers": [
+                {"answer": "+", "isCorrect": false},
+                {"answer": "*", "isCorrect": false},
+                {"answer": ".", "isCorrect": true},
+                {"answer": ",", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Qué función se utiliza para abrir un archivo en PHP?",
+            "answers": [
+                {"answer": "file_open()", "isCorrect": false},
+                {"answer": "open_file()", "isCorrect": false},
+                {"answer": "fopen()", "isCorrect": true},
+                {"answer": "read_file()", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Qué ciclo se utiliza para iterar sobre un arreglo en PHP?",
+            "answers": [
+                {"answer": "if", "isCorrect": false},
+                {"answer": "for", "isCorrect": false},
+                {"answer": "foreach", "isCorrect": true},
+                {"answer": "while", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es el resultado de la función strlen('PHP') en PHP?",
+            "answers": [
+                {"answer": "3", "isCorrect": false},
+                {"answer": "4", "isCorrect": true},
+                {"answer": "2", "isCorrect": false},
+                {"answer": "5", "isCorrect": false}
+            ]
+        }
+    ]
+}

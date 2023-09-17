@@ -24,3 +24,25 @@ export const UserInitial = {
   email: '',
   isAuth: false
 }
+
+
+// Quiz
+type AnswerType = {
+  answer: string,
+  isCorrect: boolean
+}
+
+type QuestionType = {
+  question: string,
+  answers: AnswerType[]
+}
+
+export interface QuizType {
+  name: string,
+  description: string,
+  questions: QuestionType[]
+}
+
+export interface QuizContextType {
+  quizzes: QuizType[]
+}

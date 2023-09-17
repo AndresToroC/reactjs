@@ -17,7 +17,7 @@ export const Header = () => {
                 <nav className='hidden md:block'>
                   <ul className='flex gap-3 rounded-full bg-white/90 border border-gray-500 p-3 dark:bg-zinc-800'>
                     <li>Datos</li>
-                    <li>Examanes</li>
+                    <li>Quiz</li>
                     <li onClick={ hanldleLogout }>Salir</li>
                   </ul>
                 </nav>

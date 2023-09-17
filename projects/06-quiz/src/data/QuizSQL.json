@@ -1,0 +1,51 @@
+{
+    "name": "Quiz de Bases de Datos",
+    "description": "Un quiz para poner a prueba tus conocimientos en bases de datos.",
+    "questions": [
+        {
+            "question": "¿Qué es SQL?",
+            "answers": [
+                {"answer": "Structured Query Language", "isCorrect": true},
+                {"answer": "Structured Question Language", "isCorrect": false},
+                {"answer": "Structured Query Logic", "isCorrect": false},
+                {"answer": "Structured Question Logic", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es el propósito principal de un índice en una base de datos?",
+            "answers": [
+                {"answer": "Almacenar datos de manera ordenada", "isCorrect": false},
+                {"answer": "Reducir la redundancia de datos", "isCorrect": false},
+                {"answer": "Mejorar la velocidad de búsqueda", "isCorrect": true},
+                {"answer": "Realizar cálculos complejos", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Qué tipo de base de datos se basa en tablas relacionales?",
+            "answers": [
+                {"answer": "NoSQL", "isCorrect": false},
+                {"answer": "MongoDB", "isCorrect": false},
+                {"answer": "SQL", "isCorrect": true},
+                {"answer": "SQLite", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Qué comando se utiliza para agregar datos a una tabla en SQL?",
+            "answers": [
+                {"answer": "UPDATE", "isCorrect": false},
+                {"answer": "ADD", "isCorrect": false},
+                {"answer": "INSERT", "isCorrect": true},
+                {"answer": "CREATE", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál de las siguientes cláusulas SQL se utiliza para filtrar registros en una consulta?",
+            "answers": [
+                {"answer": "SELECT", "isCorrect": false},
+                {"answer": "ORDER BY", "isCorrect": false},
+                {"answer": "WHERE", "isCorrect": true},
+                {"answer": "GROUP BY", "isCorrect": false}
+            ]
+        }
+    ]
+}

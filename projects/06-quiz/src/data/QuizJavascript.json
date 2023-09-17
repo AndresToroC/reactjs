@@ -1,0 +1,52 @@
+
+{
+    "name": "Quiz de JavaScript",
+    "description": "Un quiz para poner a prueba tus conocimientos en JavaScript.",
+    "questions": [
+        {
+            "question": "¿Cuál es el resultado de 5 + 7?",
+            "answers": [
+                {"answer": "10", "isCorrect": false},
+                {"answer": "11", "isCorrect": false},
+                {"answer": "12", "isCorrect": true},
+                {"answer": "13", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿En JavaScript, cuál es la palabra clave para declarar una variable?",
+            "answers": [
+                {"answer": "var", "isCorrect": true},
+                {"answer": "variable", "isCorrect": false},
+                {"answer": "let", "isCorrect": false},
+                {"answer": "const", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál de los siguientes no es un tipo de dato primitivo en JavaScript?",
+            "answers": [
+                {"answer": "number", "isCorrect": false},
+                {"answer": "boolean", "isCorrect": false},
+                {"answer": "object", "isCorrect": true},
+                {"answer": "string", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es la función en JavaScript que se utiliza para imprimir en la consola?",
+            "answers": [
+                {"answer": "console.log()", "isCorrect": true},
+                {"answer": "print()", "isCorrect": false},
+                {"answer": "log()", "isCorrect": false},
+                {"answer": "display()", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es el resultado de 2 * '3' en JavaScript?",
+            "answers": [
+                {"answer": "6", "isCorrect": true},
+                {"answer": "23", "isCorrect": false},
+                {"answer": "NaN", "isCorrect": false},
+                {"answer": "Error", "isCorrect": false}
+            ]
+        }
+    ]
+}

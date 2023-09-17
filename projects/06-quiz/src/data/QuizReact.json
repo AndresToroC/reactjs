@@ -1,0 +1,51 @@
+{
+    "name": "Quiz de React",
+    "description": "Un quiz para poner a prueba tus conocimientos en React.",
+    "questions": [
+        {
+            "question": "¿Qué biblioteca se utiliza como base para el desarrollo de aplicaciones en React?",
+            "answers": [
+                {"answer": "React Native", "isCorrect": false},
+                {"answer": "React Framework", "isCorrect": false},
+                {"answer": "React JS", "isCorrect": true},
+                {"answer": "React UI", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Qué es un componente en React?",
+            "answers": [
+                {"answer": "Un archivo HTML", "isCorrect": false},
+                {"answer": "Una función de JavaScript", "isCorrect": true},
+                {"answer": "Una imagen", "isCorrect": false},
+                {"answer": "Un archivo de estilos CSS", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cómo se pasa datos de un componente padre a un componente hijo en React?",
+            "answers": [
+                {"answer": "Usando una petición HTTP", "isCorrect": false},
+                {"answer": "Mediante la manipulación del DOM", "isCorrect": false},
+                {"answer": "A través de props", "isCorrect": true},
+                {"answer": "Usando Redux", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es la función principal que debe implementar un componente de clase en React?",
+            "answers": [
+                {"answer": "render()", "isCorrect": true},
+                {"answer": "component()", "isCorrect": false},
+                {"answer": "display()", "isCorrect": false},
+                {"answer": "main()", "isCorrect": false}
+            ]
+        },
+        {
+            "question": "¿Cuál es el hook de React que se utiliza para realizar efectos secundarios en componentes funcionales?",
+            "answers": [
+                {"answer": "useState()", "isCorrect": false},
+                {"answer": "useContext()", "isCorrect": false},
+                {"answer": "useEffect()", "isCorrect": true},
+                {"answer": "useRef()", "isCorrect": false}
+            ]
+        }
+    ]
+}
