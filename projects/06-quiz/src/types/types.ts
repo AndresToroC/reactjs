@@ -32,17 +32,20 @@ type AnswerType = {
   isCorrect: boolean
 }
 
-type QuestionType = {
+export type QuestionType = {
   question: string,
   answers: AnswerType[]
 }
 
 export interface QuizType {
+  id: string,
   name: string,
   description: string,
   questions: QuestionType[]
 }
 
 export interface QuizContextType {
-  quizzes: QuizType[]
+  quizzes: QuizType[],
+  quizSelected: QuizType,
+  findQuiz: (quizId: string) => void
 }

@@ -7,6 +7,7 @@ import { QuizComponent } from '../components/Quiz/QuizComponent';
 import { ProtectedRouter } from './ProtectedRouter';
 import { useUserContext } from '../hook/useUserContext';
 import { PublicRouter } from './PublicRouter';
+import { QuizItem } from '../components/Quiz/QuizItem';
 
 export const Router = () => {
   const { user } = useUserContext() 
@@ -29,6 +30,10 @@ export const Router = () => {
         {
           path: '/quiz',
           element: <QuizComponent />,
+        },
+        {
+          path: '/quiz/:quizId',
+          element: <QuizItem />,
         }
       ]
     },
