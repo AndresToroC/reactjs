@@ -16,9 +16,9 @@ export const Header = () => {
               <section className='flex flex-1 justify-end md:justify-center'>
                 <nav className='hidden md:block'>
                   <ul className='flex gap-3 rounded-full bg-white/90 border border-gray-500 p-3 dark:bg-zinc-800'>
-                    <li>Datos</li>
+                    <li>Quiz</li>
                     {/* <Link to={{ pathname }}>Quiz</Link> */}
-                    <li onClick={ hanldleLogout }>Salir</li>
+                    <li onClick={ hanldleLogout }>Logout</li>
                   </ul>
                 </nav>
               </section>

@@ -1,3 +1,6 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Header } from './components/Header';
 import { QuizProvider } from './context/QuizContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -15,6 +18,8 @@ function App() {
           <Router />
         </QuizProvider>
       </UserProvider>
+
+      <ToastContainer autoClose={ 1000 } position='bottom-center' />
     </main>
   )
 }

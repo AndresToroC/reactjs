@@ -27,7 +27,7 @@ export const UserInitial = {
 
 
 // Quiz
-type AnswerType = {
+export type AnswerType = {
   answer: string,
   isCorrect: boolean
 }

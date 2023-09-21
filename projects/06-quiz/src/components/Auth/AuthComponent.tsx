@@ -39,7 +39,7 @@ export const AuthComponent = () => {
             <input type='email' id='email' name='email' value={ email } onChange={ handleInputChange } className='block w-full border border-gray-200 bg-gray-50 text-sm px-2 py-3 rounded-md dark:bg-slate-700 dark:border-gray-700' />
           </fieldset>
           <fieldset className='mt-4'>
-            <button className='w-full px-2 py-3 bg-blue-700 rounded-full hover:bg-blue-600 font-medium text-white'>Iniciar</button>
+            <button className='w-full px-2 py-3 bg-blue-700 rounded-full hover:bg-blue-600 font-medium text-white'>Log in</button>
           </fieldset>
         </form>
       </section>
