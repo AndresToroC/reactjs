@@ -5,7 +5,10 @@ import { AnswerType, QuestionType } from '../../types/types'
 import { AnswerComponent } from './AnswerComponent'
 
 interface Props {
-  questions: QuestionType[]
+  questions: QuestionType[],
+  setIsFinish: (isFinish: boolean) => void,
+  setPercentage: (percentage: number) => void,
+  setTotalCorrectAnswer: (totalCorrectAnswer: number) => void
 }
 
 const initialAnswer = {
@@ -13,7 +16,7 @@ const initialAnswer = {
   isCorrect: false
 }
 
-export const QuizQuestion: React.FC<Props> = ({ questions }) => {
+export const QuizQuestion: React.FC<Props> = ({ questions, setIsFinish, setPercentage, setTotalCorrectAnswer }) => {
   const [indexQuestion, setIndexQuestion] = useState(0)
   const [selectAnswers, setSelectAnswers] = useState<AnswerType[]>([initialAnswer])
   const [answerSelected, setAnswerSelected] = useState('')
@@ -48,19 +51,21 @@ export const QuizQuestion: React.FC<Props> = ({ questions }) => {
   const handleQuestionSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()    
 
-    let percentage = 0
-    let totalCorrectAnswer = 0
+    let sumAvarage = 0
+    let totalAnswer = 0
     const average = 100 / totalQuestions
     
     selectAnswers.map(answer => {
       if (answer.isCorrect) {
-        percentage += average
-        totalCorrectAnswer++
+        sumAvarage += average
+        totalAnswer++
       }
-    })    
+    })
 
-    console.log(percentage, totalCorrectAnswer);
-    
+    setPercentage(sumAvarage)
+    setTotalCorrectAnswer(totalAnswer)
+
+    setIsFinish(true)
   }
 
   useEffect(() => {
@@ -70,32 +75,30 @@ export const QuizQuestion: React.FC<Props> = ({ questions }) => {
   
   return (
     <>
-      {/* <form onSubmit={ handleQuestionSubmit }> */}
-        <h3 className='text-base mb-3'><b>Question:</b> { indexQuestion + 1 }/{ totalQuestions }</h3>
-        <section className='border broder-gray-200 p-4 rounded-lg dark:border-gray-700 mb-2'>
-          <h3 className='font-medium text-base'>Question: { question.question }</h3>
-          <hr className='border-gray-200 dark:border-gray-700' />
-            <AnswerComponent 
-              answers={ question.answers } 
-              answerSelected={ answerSelected }
-              indexQuestion={ indexQuestion }
-              handleSelectAnswer={ handleSelectAnswer } />
-        </section>
-        
-        <section className='flex gap-4'>
-          <div className='flex-1'>
-            <button type='button' className='w-full border border-gray-200 text-black hover:bg-gray-100 rounded-lg py-3 dark:text-white dark:bg-zinc-800 dark:hover:bg-zinc-600 dark:border-none font-bold' 
-              onClick={ previousQuestion }>Previous</button>
-          </div>
-          <div className='flex-1'>
-            {
-              totalQuestions === indexQuestion + 1
-                ? <button type='button' className='w-full bg-blue-700 hover:bg-blue-600 rounded-lg py-3 text-white font-bold' onClick={ handleQuestionSubmit }>Send</button>
-                : <button type='button' className='w-full bg-green-700 hover:bg-green-600 rounded-lg py-3 text-white font-bold' onClick={ nextQuestion }>Next</button>
-            }
-          </div>
-        </section>
-      {/* </form> */}
+      <h3 className='text-base mb-3'><b>Question:</b> { indexQuestion + 1 }/{ totalQuestions }</h3>
+      <section className='border broder-gray-200 p-4 rounded-lg dark:border-gray-700 mb-2'>
+        <h3 className='font-medium text-base'>Question: { question.question }</h3>
+        <hr className='border-gray-200 dark:border-gray-700' />
+          <AnswerComponent 
+            answers={ question.answers } 
+            answerSelected={ answerSelected }
+            indexQuestion={ indexQuestion }
+            handleSelectAnswer={ handleSelectAnswer } />
+      </section>
+      
+      <section className='flex gap-4'>
+        <div className='flex-1'>
+          <button type='button' className='w-full border border-gray-200 text-black hover:bg-gray-100 rounded-lg py-3 dark:text-white dark:bg-zinc-800 dark:hover:bg-zinc-600 dark:border-none font-bold' 
+            onClick={ previousQuestion }>Previous</button>
+        </div>
+        <div className='flex-1'>
+          {
+            totalQuestions === indexQuestion + 1
+              ? <button type='button' className='w-full bg-blue-700 hover:bg-blue-600 rounded-lg py-3 text-white font-bold' onClick={ handleQuestionSubmit }>Send</button>
+              : <button type='button' className='w-full bg-green-700 hover:bg-green-600 rounded-lg py-3 text-white font-bold' onClick={ nextQuestion }>Next</button>
+          }
+        </div>
+      </section>
     </>
   )
 }
